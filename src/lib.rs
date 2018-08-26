@@ -61,7 +61,7 @@ impl XivApi {
     CharacterSearchBuilder::new(self)
   }
 
-  pub fn character(&self, id: usize) -> CharacterBuilder {
+  pub fn character(&self, id: u64) -> CharacterBuilder {
     CharacterBuilder::new(self, id)
   }
 
@@ -69,11 +69,11 @@ impl XivApi {
     SearchBuilder::new(self)
   }
 
-  pub fn action(&self, id: usize) -> ContentBuilder<models::Action> {
+  pub fn action(&self, id: u64) -> ContentBuilder<models::Action> {
     ContentBuilder::new(self, id)
   }
 
-  pub fn item(&self, id: usize) -> ContentBuilder<models::Item> {
+  pub fn item(&self, id: u64) -> ContentBuilder<models::Item> {
     ContentBuilder::new(self, id)
   }
 }

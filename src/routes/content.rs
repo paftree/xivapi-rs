@@ -13,7 +13,7 @@ pub struct ContentBuilder<'x, 'a, O> {
   api: &'x XivApi,
 
   #[serde(skip)]
-  id: usize,
+  id: u64,
 
   #[serde(
     skip_serializing_if = "Option::is_none",
@@ -46,7 +46,7 @@ impl<O> Builder<'x> for ContentBuilder<'x, 'a, O>
 impl<O> ContentBuilder<'x, 'a, O>
   where for<'de> O: serde::Deserialize<'de>,
 {
-  crate fn new(api: &'x XivApi, id: usize) -> Self {
+  crate fn new(api: &'x XivApi, id: u64) -> Self {
     ContentBuilder {
       api,
       id,

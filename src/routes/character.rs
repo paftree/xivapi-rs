@@ -18,7 +18,7 @@ pub struct CharacterBuilder<'x, 'a> {
   api: &'x XivApi,
 
   #[serde(skip)]
-  id: usize,
+  id: u64,
 
   #[serde(
     skip_serializing_if = "Option::is_none",
@@ -40,7 +40,7 @@ impl Builder<'x> for CharacterBuilder<'x, 'a> {
 }
 
 impl CharacterBuilder<'x, 'a> {
-  crate fn new(api: &'x XivApi, id: usize) -> Self {
+  crate fn new(api: &'x XivApi, id: u64) -> Self {
     CharacterBuilder {
       api,
       id,
