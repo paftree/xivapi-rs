@@ -31,7 +31,7 @@ pub trait Builder<'x>
       route.set_query(Some(&route_query));
     }
 
-    println!("route: {:#?}", route);
+    debug!("route: {:#?}", route);
 
     let mut res = self.api().client.get(route).send().map_err(Error::Reqwest)?;
 

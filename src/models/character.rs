@@ -1,4 +1,4 @@
-use crate::prelude::Either;
+// use crate::prelude::Either;
 
 use ffxiv_types::World;
 
@@ -21,7 +21,7 @@ pub struct Character {
   pub race: Race,
   pub tribe: Tribe,
   pub server: World,
-  pub title: Either<bool, serde_json::Value>,
+  pub title: Option<usize>,
   pub town: Town,
   #[serde(with = "url_serde")]
   pub avatar: Url,
@@ -45,6 +45,7 @@ pub struct Character {
 #[serde(rename_all = "PascalCase")]
 pub struct CharacterResult {
   pub state: State,
+  // pub payload: Either<Character, [!; 0]>,
   pub payload: Option<Character>,
 }
 
@@ -97,8 +98,8 @@ pub enum GearSlot {
 #[serde(rename_all = "PascalCase")]
 pub struct Gear {
   #[serde(rename = "ID")]
-  pub id: Either<usize, bool>,
-  pub dye: Either<Option<usize>, bool>,
+  pub id: Option<usize>,
+  pub dye: Option<usize>,
   pub mirage: Option<serde_json::Value>,
   pub materia: Vec<serde_json::Value>,
   pub creator: Option<usize>,
