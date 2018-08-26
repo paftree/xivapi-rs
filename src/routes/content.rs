@@ -10,7 +10,7 @@ use std::borrow::Cow;
 #[derive(Debug, Serialize)]
 pub struct ContentBuilder<'x, 'a, O> {
   #[serde(skip)]
-  api: &'x XivApi<'x>,
+  api: &'x XivApi,
 
   #[serde(skip)]
   id: usize,
@@ -34,7 +34,7 @@ impl<O> Builder<'x> for ContentBuilder<'x, 'a, O>
 {
   type Output = O;
 
-  fn api(&self) -> &'x XivApi<'x> {
+  fn api(&self) -> &'x XivApi {
     self.api
   }
 
@@ -46,7 +46,7 @@ impl<O> Builder<'x> for ContentBuilder<'x, 'a, O>
 impl<O> ContentBuilder<'x, 'a, O>
   where for<'de> O: serde::Deserialize<'de>,
 {
-  crate fn new(api: &'x XivApi<'x>, id: usize) -> Self {
+  crate fn new(api: &'x XivApi, id: usize) -> Self {
     ContentBuilder {
       api,
       id,

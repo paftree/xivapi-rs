@@ -17,7 +17,7 @@ use std::borrow::Cow;
 #[derive(Debug, Serialize)]
 pub struct SearchBuilder<'x, 'a> {
   #[serde(skip)]
-  api: &'x XivApi<'x>,
+  api: &'x XivApi,
 
   #[serde(skip_serializing_if = "Option::is_none")]
   string: Option<&'a str>,
@@ -56,7 +56,7 @@ pub struct SearchBuilder<'x, 'a> {
 impl Builder<'x> for SearchBuilder<'x, 'a> {
   type Output = SearchResult;
 
-  fn api(&self) -> &'x XivApi<'x> {
+  fn api(&self) -> &'x XivApi {
     self.api
   }
 
@@ -66,7 +66,7 @@ impl Builder<'x> for SearchBuilder<'x, 'a> {
 }
 
 impl SearchBuilder<'x, 'a> {
-  crate fn new(api: &'x XivApi<'x>) -> Self {
+  crate fn new(api: &'x XivApi) -> Self {
     SearchBuilder {
       api,
       string: None,

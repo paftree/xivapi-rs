@@ -63,7 +63,7 @@ pub trait Builder<'x>
     res.text().map_err(Error::Reqwest)
   }
 
-  fn api(&self) -> &'x XivApi<'x>;
+  fn api(&self) -> &'x XivApi;
 
   fn route(&self) -> Cow<str>;
 }

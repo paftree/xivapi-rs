@@ -15,7 +15,7 @@ pub mod search;
 #[derive(Debug, Serialize)]
 pub struct CharacterBuilder<'x, 'a> {
   #[serde(skip)]
-  api: &'x XivApi<'x>,
+  api: &'x XivApi,
 
   #[serde(skip)]
   id: usize,
@@ -30,7 +30,7 @@ pub struct CharacterBuilder<'x, 'a> {
 impl Builder<'x> for CharacterBuilder<'x, 'a> {
   type Output = CharacterResult;
 
-  fn api(&self) -> &'x XivApi<'x> {
+  fn api(&self) -> &'x XivApi {
     self.api
   }
 
@@ -40,7 +40,7 @@ impl Builder<'x> for CharacterBuilder<'x, 'a> {
 }
 
 impl CharacterBuilder<'x, 'a> {
-  crate fn new(api: &'x XivApi<'x>, id: usize) -> Self {
+  crate fn new(api: &'x XivApi, id: usize) -> Self {
     CharacterBuilder {
       api,
       id,

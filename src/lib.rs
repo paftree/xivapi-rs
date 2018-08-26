@@ -7,10 +7,7 @@ use reqwest::Client;
 
 use url::Url;
 
-use std::{
-  borrow::Cow,
-  str::FromStr,
-};
+use std::str::FromStr;
 
 mod comma;
 pub mod routes;
@@ -29,24 +26,24 @@ use crate::routes::{
 };
 
 #[derive(Debug)]
-pub struct XivApi<'a> {
+pub struct XivApi {
   client: Client,
-  key: Option<Cow<'a, str>>,
+  key: Option<String>,
 }
 
-impl Default for XivApi<'a> {
+impl Default for XivApi {
   fn default() -> Self {
     XivApi::new()
   }
 }
 
-impl XivApi<'a> {
+impl XivApi {
   pub fn new() -> Self {
     let client = Client::new();
     XivApi { client, key: None }
   }
 
-  pub fn with_key<S: Into<Cow<'a, str>>>(key: S) -> Self {
+  pub fn with_key<S: Into<String>>(key: S) -> Self {
     let client = Client::new();
     let key = Some(key.into());
     XivApi { client, key }
