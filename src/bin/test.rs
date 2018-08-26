@@ -6,10 +6,14 @@ use xivapi::{
 fn main() {
   let api = XivApi::new();
 
+  // let res = api
+  //   .search()
+  //   .index(Index::InstanceContent)
+  //   .string("a")
+  //   .send();
+
   let res = api
-    .search()
-    .index(Index::InstanceContent)
-    .string("a")
+    .item(21495)
     .send();
 
   println!("{:#?}", res);

@@ -19,7 +19,10 @@ pub mod error;
 pub mod models;
 pub mod prelude;
 
-use crate::routes::search::SearchBuilder;
+use crate::routes::{
+  search::SearchBuilder,
+  content::ContentBuilder,
+};
 
 #[derive(Debug)]
 pub struct XivApi<'a> {
@@ -55,5 +58,13 @@ impl XivApi<'a> {
 
   pub fn search(&self) -> SearchBuilder {
     SearchBuilder::new(self)
+  }
+
+  pub fn action(&self, id: usize) -> ContentBuilder<models::Action> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn item(&self, id: usize) -> ContentBuilder<models::Item> {
+    ContentBuilder::new(self, id)
   }
 }

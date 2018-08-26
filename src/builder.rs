@@ -4,6 +4,8 @@ use log::debug;
 
 use serde::{Deserialize, Serialize};
 
+use std::borrow::Cow;
+
 pub trait Builder<'x>
   where Self: Serialize,
         for<'de> Self::Output: Deserialize<'de>,
@@ -12,10 +14,10 @@ pub trait Builder<'x>
 
   fn api(&self) -> &'x XivApi<'x>;
 
-  fn route(&self) -> &str;
+  fn route(&self) -> Cow<str>;
 
   fn send(&mut self) -> Result<Self::Output> {
-    let mut route = self.api().url(self.route());
+    let mut route = self.api().url(&self.route());
 
     let query = serde_urlencoded::to_string(&self).map_err(Error::UrlEncode)?;
     route.set_query(Some(&query));

@@ -11,6 +11,8 @@ use crate::{
   }
 };
 
+use std::borrow::Cow;
+
 #[derive(Debug, Serialize)]
 pub struct SearchBuilder<'x, 'a> {
   #[serde(skip)]
@@ -57,8 +59,8 @@ impl Builder<'x> for SearchBuilder<'x, 'a> {
     self.api
   }
 
-  fn route(&self) -> &str {
-    "/search"
+  fn route(&self) -> Cow<str> {
+    Cow::Borrowed("/search")
   }
 }
 
