@@ -13,6 +13,7 @@ use crate::{
 
 use std::borrow::Cow;
 
+/// A request builder for searching for content on XIVAPI.
 #[derive(Debug, Serialize)]
 pub struct SearchBuilder<'x, 'a> {
   #[serde(skip)]
@@ -65,7 +66,7 @@ impl Builder<'x> for SearchBuilder<'x, 'a> {
 }
 
 impl SearchBuilder<'x, 'a> {
-  pub fn new(api: &'x XivApi<'x>) -> Self {
+  crate fn new(api: &'x XivApi<'x>) -> Self {
     SearchBuilder {
       api,
       string: None,
@@ -80,16 +81,24 @@ impl SearchBuilder<'x, 'a> {
     }
   }
 
+  /// Specify what to search for.
   pub fn string(&mut self, s: &'a str) -> &mut Self {
     self.string = Some(s);
     self
   }
 
+  /// Select which type of content to search for.
+  ///
+  /// This is additive. Each call to this function will add another type of content to search for.
   pub fn index(&mut self, i: Index) -> &mut Self {
     self.indexes.get_or_insert_with(Default::default).push(i);
     self
   }
 
+  /// Select which type of content to search for.
+  ///
+  /// This is additive. Each call to this function will add on to the already specified types, if
+  /// any.
   pub fn indexes(&mut self, mut is: Vec<Index>) -> &mut Self {
     self.indexes.get_or_insert_with(Default::default).append(&mut is);
     self
@@ -105,6 +114,7 @@ impl SearchBuilder<'x, 'a> {
     self
   }
 
+  /// Pick which page to fetch.
   pub fn page(&mut self, p: usize) -> &mut Self {
     self.page = Some(p);
     self
@@ -120,11 +130,13 @@ impl SearchBuilder<'x, 'a> {
     self
   }
 
+  /// Change the limit for how many results are fetched.
   pub fn limit(&mut self, l: usize) -> &mut Self {
     self.limit = Some(l);
     self
   }
 
+  /// Set filters on what is fetched.
   pub fn filters(&mut self, f: &'a [&'a str]) -> &mut Self {
     self.filters = Some(f);
     self

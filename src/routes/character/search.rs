@@ -10,6 +10,7 @@ use ffxiv_types::World;
 
 use std::borrow::Cow;
 
+/// A builder for searching for a character on XIVAPI.
 #[derive(Debug, Serialize)]
 pub struct SearchBuilder<'x, 'a> {
   #[serde(skip)]
@@ -38,7 +39,7 @@ impl Builder<'x> for SearchBuilder<'x, 'a> {
 }
 
 impl SearchBuilder<'x, 'a> {
-  pub fn new(api: &'x XivApi<'x>) -> Self {
+  crate fn new(api: &'x XivApi<'x>) -> Self {
     SearchBuilder {
       api,
       name: None,
@@ -47,16 +48,19 @@ impl SearchBuilder<'x, 'a> {
     }
   }
 
+  /// Specify the name to search for.
   pub fn name(&mut self, n: &'a str) -> &mut Self {
     self.name = Some(n);
     self
   }
 
+  /// Specify the server to search on.
   pub fn server(&mut self, s: World) -> &mut Self {
     self.server = Some(s);
     self
   }
 
+  // Select the page of results to view.
   pub fn page(&mut self, p: usize) -> &mut Self {
     self.page = Some(p);
     self

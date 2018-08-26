@@ -45,14 +45,14 @@ pub enum SearchModel {
 #[serde(rename_all = "PascalCase")]
 pub struct Metadata {
   #[serde(rename = "ID")]
-  id: usize,
-  name: String,
-  icon: String,
-  url: String,
+  pub id: usize,
+  pub name: String,
+  pub icon: String,
+  pub url: String,
   #[serde(rename = "_")]
-  index: String,
+  pub index: String,
   #[serde(rename = "_Score")]
-  score: usize,
+  pub score: usize,
 }
 
 #[derive(Debug, Deserialize)]

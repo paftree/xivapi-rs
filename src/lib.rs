@@ -1,4 +1,4 @@
-#![feature(in_band_lifetimes)]
+#![feature(in_band_lifetimes, never_type)]
 
 #[macro_use] extern crate failure;
 #[macro_use] extern crate serde_derive;
@@ -13,7 +13,7 @@ use std::{
 };
 
 mod comma;
-mod routes;
+pub mod routes;
 pub mod builder;
 pub mod error;
 pub mod models;

@@ -1,6 +1,7 @@
 use crate::{
   XivApi,
   builder::Builder,
+  comma::CommaSerializer,
   models::character::CharacterResult,
 };
 
@@ -10,6 +11,7 @@ use std::borrow::Cow;
 
 pub mod search;
 
+/// A builder for fetching character information from XIVAPI.
 #[derive(Debug, Serialize)]
 pub struct CharacterBuilder<'x, 'a> {
   #[serde(skip)]
@@ -18,7 +20,10 @@ pub struct CharacterBuilder<'x, 'a> {
   #[serde(skip)]
   id: usize,
 
-  #[serde(skip_serializing_if = "Option::is_none")]
+  #[serde(
+    skip_serializing_if = "Option::is_none",
+    serialize_with = "CommaSerializer::with",
+  )]
   columns: Option<&'a [&'a str]>,
 }
 
@@ -35,7 +40,7 @@ impl Builder<'x> for CharacterBuilder<'x, 'a> {
 }
 
 impl CharacterBuilder<'x, 'a> {
-  pub fn new(api: &'x XivApi<'x>, id: usize) -> Self {
+  crate fn new(api: &'x XivApi<'x>, id: usize) -> Self {
     CharacterBuilder {
       api,
       id,
@@ -43,6 +48,12 @@ impl CharacterBuilder<'x, 'a> {
     }
   }
 
+  /// Pick which columns to fetch.
+  ///
+  /// # Note
+  /// If using this, the builder must not be finished by calling `send`, as the output will not be
+  /// the default output. You will need to create your own data structure to deserialise into, then
+  /// call `json`.
   pub fn columns(&mut self, c: &'a [&'a str]) -> &mut Self {
     self.columns = Some(c);
     self
