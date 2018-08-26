@@ -1,4 +1,15 @@
-use crate::{XivApi, builder::Builder, comma::CommaSerializer};
+use crate::{
+  XivApi,
+  builder::Builder,
+  comma::CommaSerializer,
+  models::search::{
+    Index,
+    SearchResult,
+    SortOrder,
+    StringAlgo,
+    StringColumn,
+  }
+};
 
 #[derive(Debug, Serialize)]
 pub struct SearchBuilder<'x, 'a> {
@@ -118,59 +129,3 @@ impl SearchBuilder<'x, 'a> {
   }
 }
 
-#[derive(Debug, Clone, Copy, Serialize)]
-#[serde(rename_all = "lowercase")]
-pub enum Index {
-  Achievement,
-  Action,
-  BNpcName,
-  Companion,
-  Emote,
-  ENpcResident,
-  Fate,
-  InstanceContent,
-  Item,
-  Leve,
-  Mount,
-  PlaceName,
-  Quest,
-  Recipe,
-  Status,
-  Title,
-  Weather,
-}
-
-#[derive(Debug, Clone, Copy, Serialize)]
-#[serde(rename_all = "snake_case")]
-pub enum StringColumn {
-  Description,
-}
-
-#[derive(Debug, Clone, Copy, Serialize)]
-#[serde(rename_all = "snake_case")]
-pub enum StringAlgo {
-  Fuzzy,
-  MatchPhrasePrefix,
-  MultiMatch,
-  Prefix,
-  QueryString,
-  Term,
-  Wildcard,
-  WildcardPlus,
-}
-
-#[derive(Debug, Clone, Copy, Serialize)]
-pub enum SortOrder {
-  #[serde(rename = "asc")]
-  Ascending,
-  #[serde(rename = "desc")]
-  Descending,
-}
-
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "PascalCase")]
-pub struct SearchResult {
-  speed_ms: usize,
-  pagination: serde_json::Value,
-  results: serde_json::Value,
-}

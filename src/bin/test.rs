@@ -1,6 +1,16 @@
-use xivapi::{XivApi, builder::Builder};
+use xivapi::{
+  prelude::*,
+  models::search::Index,
+};
 
 fn main() {
   let api = XivApi::new();
-  println!("{:#?}", api.search().string("allagan").send());
+
+  let res = api
+    .search()
+    .index(Index::InstanceContent)
+    .string("a")
+    .send();
+
+  println!("{:#?}", res);
 }

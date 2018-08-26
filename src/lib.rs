@@ -16,6 +16,7 @@ mod comma;
 mod routes;
 pub mod builder;
 pub mod error;
+pub mod models;
 pub mod prelude;
 
 use crate::routes::search::SearchBuilder;
