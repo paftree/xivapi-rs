@@ -45,20 +45,20 @@ pub enum SearchModel {
 #[serde(rename_all = "PascalCase")]
 pub struct Metadata {
   #[serde(rename = "ID")]
-  pub id: usize,
+  pub id: u64,
   pub name: String,
   pub icon: String,
   pub url: String,
   #[serde(rename = "_")]
   pub index: String,
   #[serde(rename = "_Score")]
-  pub score: usize,
+  pub score: u64,
 }
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct SearchResult {
-  pub speed_ms: usize,
+  pub speed_ms: u64,
   pub pagination: Pagination,
   pub results: Vec<SearchModel>,
 }
@@ -66,13 +66,13 @@ pub struct SearchResult {
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct Pagination {
-  pub page: usize,
+  pub page: u64,
   pub page_next: Option<usize>,
   pub page_prev: Option<usize>,
-  pub page_total: usize,
-  pub results: usize,
-  pub results_per_page: usize,
-  pub results_total: usize,
+  pub page_total: u64,
+  pub results: u64,
+  pub results_per_page: u64,
+  pub results_total: u64,
 }
 
 #[derive(Debug, Clone, Copy, Serialize)]

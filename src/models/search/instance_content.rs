@@ -16,11 +16,11 @@ pub struct InstanceContent {
 #[derive(Debug, Deserialize)]
 pub struct ContentFinderConditions {
   #[serde(rename = "ContentFinderCondition.ClassJobLevelRequired")]
-  pub class_job_level_required: usize,
+  pub class_job_level_required: u64,
   #[serde(rename = "ContentFinderCondition.ClassJobLevelSync")]
-  pub class_job_level_sync: usize,
+  pub class_job_level_sync: u64,
   #[serde(rename = "ContentFinderCondition.ItemLevelRequired")]
-  pub item_level_required: usize,
+  pub item_level_required: u64,
   #[serde(rename = "ContentFinderCondition.ItemLevelSync")]
-  pub item_level_sync: usize,
+  pub item_level_sync: u64,
 }

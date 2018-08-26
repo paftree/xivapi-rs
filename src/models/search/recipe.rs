@@ -10,7 +10,7 @@ pub struct Recipe {
   #[serde(rename = "SecretRecipeBook.Name")]
   pub secret_recipe_book_name: Option<String>,
   #[serde(rename = "RecipeLevelTable.Stars")]
-  pub recipe_level_table_stars: usize,
+  pub recipe_level_table_stars: u64,
   #[serde(rename = "RecipeLevelTable.ClassJobLevel")]
-  pub recipe_level_table_class_job_level: usize,
+  pub recipe_level_table_class_job_level: u64,
 }

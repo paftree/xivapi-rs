@@ -5,8 +5,8 @@ use super::Metadata;
 pub struct Quest {
   #[serde(flatten)]
   pub metadata: Metadata,
-  pub class_job_level_0: usize,
-  pub class_job_level_1: usize,
+  pub class_job_level_0: u64,
+  pub class_job_level_1: u64,
   #[serde(rename = "JournalGenre.Name")]
   pub journal_genre_name: Option<String>,
   #[serde(rename = "JournalGenre.JournalCategory.Name")]

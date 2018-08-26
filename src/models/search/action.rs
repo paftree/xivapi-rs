@@ -9,5 +9,5 @@ pub struct Action {
   pub action_category_name: Option<String>,
   #[serde(rename = "ClassJobCategory.Name")]
   pub class_job_category_name: Option<String>,
-  pub class_job_level: usize,
+  pub class_job_level: u64,
 }

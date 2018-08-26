@@ -5,7 +5,7 @@ use super::Metadata;
 pub struct Achievement {
   #[serde(flatten)]
   pub metadata: Metadata,
-  pub points: usize,
+  pub points: u64,
   #[serde(rename = "AchievementCategory.Name")]
   pub achievement_category_name: String,
   #[serde(rename = "AchievementCategory.AchievementKind.Name")]

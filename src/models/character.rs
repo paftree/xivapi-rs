@@ -12,10 +12,10 @@ pub mod search;
 #[serde(rename_all = "PascalCase")]
 pub struct Character {
   #[serde(rename = "ID")]
-  pub id: usize,
+  pub id: u64,
   pub name: String,
   pub nameday: String,
-  pub parse_date: usize,
+  pub parse_date: u64,
   #[serde(rename = "PvPTeam")]
   pub pvp_team: Option<serde_json::Value>,
   pub race: Race,
@@ -53,23 +53,23 @@ pub struct CharacterResult {
 #[serde(rename_all = "PascalCase")]
 pub struct ClassJob {
   #[serde(rename = "ClassID")]
-  pub class_id: usize,
+  pub class_id: u64,
   #[serde(rename = "JobID")]
-  pub job_id: usize,
-  pub level: usize,
-  pub exp_level: usize,
-  pub exp_level_max: usize,
-  pub exp_level_togo: usize,
+  pub job_id: u64,
+  pub level: u64,
+  pub exp_level: u64,
+  pub exp_level_max: u64,
+  pub exp_level_togo: u64,
 }
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct GearSet {
   #[serde(rename = "ClassID")]
-  pub class_id: usize,
+  pub class_id: u64,
   #[serde(rename = "JobID")]
-  pub job_id: usize,
-  pub level: usize,
+  pub job_id: u64,
+  pub level: u64,
   pub gear_key: String,
   pub attributes: BTreeMap<Attribute, usize>,
   pub gear: BTreeMap<GearSlot, Gear>,
@@ -109,9 +109,9 @@ pub struct Gear {
 #[serde(rename_all = "PascalCase")]
 pub struct GrandCompany {
   #[serde(rename = "NameID")]
-  name_id: usize,
+  name_id: u64,
   #[serde(rename = "RankID")]
-  rank_id: usize,
+  rank_id: u64,
 }
 
 #[derive(Debug, Deserialize)]

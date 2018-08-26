@@ -5,6 +5,6 @@ use super::Metadata;
 pub struct Fate {
   #[serde(flatten)]
   pub metadata: Metadata,
-  pub class_job_level: usize,
-  pub class_job_level_max: usize,
+  pub class_job_level: u64,
+  pub class_job_level_max: u64,
 }

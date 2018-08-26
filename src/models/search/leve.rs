@@ -5,7 +5,7 @@ use super::Metadata;
 pub struct Leve {
   #[serde(flatten)]
   pub metadata: Metadata,
-  pub class_job_level: usize,
+  pub class_job_level: u64,
   #[serde(rename = "ClassJobCategory.Name")]
   pub class_job_category_name: String,
   #[serde(rename = "JournalGenre.Name")]
