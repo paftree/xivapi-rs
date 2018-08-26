@@ -3,18 +3,20 @@ use xivapi::{
   models::search::Index,
 };
 
-fn main() {
-  let api = XivApi::new();
+fn main() -> Result<(), failure::Error> {
+  let api = XivApi::with_key("d0b5477b34c944e3b87b8a46");
 
   // let res = api
-  //   .search()
-  //   .index(Index::InstanceContent)
-  //   .string("a")
-  //   .send();
+  //   .character_search()
+  //   .name("Duvivi Duvi")
+  //   .server(World::Adamantoise)
+  //   .send()?;
 
-  let res = api
-    .item(21495)
-    .send();
+  // let id = res.characters[0].id;
+
+  let res = api.character(2).send()?;
 
   println!("{:#?}", res);
+
+  Ok(())
 }

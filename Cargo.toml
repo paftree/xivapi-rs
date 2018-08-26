@@ -16,3 +16,9 @@ serde_json = "1"
 serde_urlencoded = "0.5"
 failure = "0.1"
 log = "0.4"
+url_serde = "0.2"
+
+[dependencies.ffxiv_types]
+version = "0.2"
+default-features = false
+features = ["worlds", "with_serde"]

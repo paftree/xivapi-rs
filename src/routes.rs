@@ -1,5 +1,6 @@
-crate mod search;
+crate mod character;
 crate mod content;
+crate mod search;
 
 #[derive(Debug, Serialize)]
 pub enum Language {

@@ -1,4 +1,4 @@
-#![feature(in_band_lifetimes, never_type)]
+#![feature(in_band_lifetimes)]
 
 #[macro_use] extern crate failure;
 #[macro_use] extern crate serde_derive;
@@ -20,6 +20,10 @@ pub mod models;
 pub mod prelude;
 
 use crate::routes::{
+  character::{
+    CharacterBuilder,
+    search::SearchBuilder as CharacterSearchBuilder,
+  },
   search::SearchBuilder,
   content::ContentBuilder,
 };
@@ -54,6 +58,14 @@ impl XivApi<'a> {
       base.query_pairs_mut().append_pair("key", &k);
     }
     base
+  }
+
+  pub fn character_search(&self) -> CharacterSearchBuilder {
+    CharacterSearchBuilder::new(self)
+  }
+
+  pub fn character(&self, id: usize) -> CharacterBuilder {
+    CharacterBuilder::new(self, id)
   }
 
   pub fn search(&self) -> SearchBuilder {

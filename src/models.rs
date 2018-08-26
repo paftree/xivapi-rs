@@ -1,4 +1,5 @@
 pub mod action;
+pub mod character;
 pub mod item;
 pub mod search;
 

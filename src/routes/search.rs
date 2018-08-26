@@ -8,7 +8,7 @@ use crate::{
     SortOrder,
     StringAlgo,
     StringColumn,
-  }
+  },
 };
 
 use std::borrow::Cow;
@@ -60,7 +60,7 @@ impl Builder<'x> for SearchBuilder<'x, 'a> {
   }
 
   fn route(&self) -> Cow<str> {
-    Cow::Borrowed("/search")
+    Cow::Borrowed("/Search")
   }
 }
 

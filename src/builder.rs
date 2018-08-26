@@ -20,14 +20,26 @@ pub trait Builder<'x>
     let mut route = self.api().url(&self.route());
 
     let query = serde_urlencoded::to_string(&self).map_err(Error::UrlEncode)?;
-    route.set_query(Some(&query));
+    let mut route_query = route.query().map(ToString::to_string).unwrap_or_default();
+    if !query.is_empty() {
+      if !route_query.is_empty() {
+        route_query += "&";
+      }
+      route_query += &query;
+    }
+    if !route_query.is_empty() {
+      route.set_query(Some(&route_query));
+    }
 
-    debug!("route: {:#?}", route);
+    println!("route: {:#?}", route);
 
     let mut res = self.api().client.get(route).send().map_err(Error::Reqwest)?;
 
-    let json = res.json().map_err(Error::Reqwest)?;
+    let text = res.text().map_err(Error::Reqwest)?;
 
-    Ok(json)
+    match serde_json::from_str::<ApiError>(&text) {
+      Ok(e) => Err(Error::Api(e)),
+      Err(_) => Ok(serde_json::from_str(&text).map_err(Error::Json)?),
+    }
   }
 }
