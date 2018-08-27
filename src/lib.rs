@@ -1,4 +1,4 @@
-#![feature(in_band_lifetimes, never_type)]
+#![feature(in_band_lifetimes, never_type, macro_at_most_once_rep)]
 
 #[macro_use] extern crate failure;
 #[macro_use] extern crate serde_derive;
@@ -74,6 +74,66 @@ impl XivApi {
   }
 
   pub fn item(&self, id: u64) -> ContentBuilder<models::Item> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn achievement(&self, id: u64) -> ContentBuilder<models::Achievement> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn emote(&self, id: u64) -> ContentBuilder<models::Emote> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn enemy(&self, id: u64) -> ContentBuilder<models::Enemy> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn fate(&self, id: u64) -> ContentBuilder<models::Fate> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn instance_content(&self, id: u64) -> ContentBuilder<models::InstanceContent> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn leve(&self, id: u64) -> ContentBuilder<models::Leve> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn minion(&self, id: u64) -> ContentBuilder<models::Minion> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn mount(&self, id: u64) -> ContentBuilder<models::Mount> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn npc(&self, id: u64) -> ContentBuilder<models::Npc> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn place_name(&self, id: u64) -> ContentBuilder<models::PlaceName> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn quest(&self, id: u64) -> ContentBuilder<models::Quest> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn recipe(&self, id: u64) -> ContentBuilder<models::Recipe> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn status(&self, id: u64) -> ContentBuilder<models::Status> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn title(&self, id: u64) -> ContentBuilder<models::Title> {
+    ContentBuilder::new(self, id)
+  }
+
+  pub fn weather(&self, id: u64) -> ContentBuilder<models::Weather> {
     ContentBuilder::new(self, id)
   }
 }

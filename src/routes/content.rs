@@ -17,7 +17,7 @@ pub struct ContentBuilder<'x, 'a, O> {
 
   #[serde(
     skip_serializing_if = "Option::is_none",
-    serialize_with = "crate::routes::bool_as_usize",
+    with = "crate::routes::int_bool",
   )]
   minified: Option<bool>,
 

@@ -6,9 +6,9 @@ pub struct Item {
   #[serde(flatten)]
   pub metadata: Metadata,
   #[serde(default)]
-  pub level_equip: Option<usize>,
+  pub level_equip: Option<u64>,
   #[serde(default)]
-  pub level_item: Option<usize>,
+  pub level_item: Option<u64>,
   #[serde(rename = "ClassJobCategory.Name")]
   pub class_job_category_name: Option<String>,
   #[serde(rename = "ItemUICategory.Name")]

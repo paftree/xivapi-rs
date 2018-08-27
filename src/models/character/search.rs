@@ -13,11 +13,11 @@ pub struct SearchResult {
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct Pagination {
-  page_current: u64,
-  page_next: u64,
-  page_previous: u64,
-  page_total: u64,
-  total: u64,
+  page_current: usize,
+  page_next: usize,
+  page_previous: usize,
+  page_total: usize,
+  total: usize,
 }
 
 #[derive(Debug, Deserialize)]

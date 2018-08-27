@@ -9,7 +9,8 @@ use xivapi::{
 };
 
 fn main() -> Result<(), failure::Error> {
-  let api = XivApi::with_key("d0b5477b34c944e3b87b8a46");
+  let key = std::env::var("XIVAPI_KEY").unwrap();
+  let api = XivApi::with_key(&key);
 
   // let res = api
   //   .character_search()
@@ -24,9 +25,11 @@ fn main() -> Result<(), failure::Error> {
   //   .columns(&["Name", "Server", "Race", "Gender"])
   //   .json()?;
 
-  let res = api
-    .character(1)
-    .send()?;
+  // let res = api
+  //   .character(1)
+  //   .send()?;
+
+  let res = api.enemy(7537).send()?;
 
   println!("{:#?}", res);
 

@@ -1,11 +1,42 @@
+pub mod achievement;
 pub mod action;
 pub mod character;
+pub mod emote;
+pub mod enemy;
+pub mod fate;
+pub mod instance_content;
 pub mod item;
+pub mod leve;
+pub mod minion;
+pub mod mount;
+pub mod npc;
+pub mod place_name;
+pub mod quest;
+pub mod recipe;
 pub mod search;
+pub mod status;
+pub mod title;
+pub mod weather;
 
 pub use self::{
+  achievement::Achievement,
   action::Action,
+  character::Character,
+  emote::Emote,
+  enemy::Enemy,
+  fate::Fate,
+  instance_content::InstanceContent,
   item::Item,
+  leve::Leve,
+  minion::Minion,
+  mount::Mount,
+  npc::Npc,
+  place_name::PlaceName,
+  quest::Quest,
+  recipe::Recipe,
+  status::Status,
+  title::Title,
+  weather::Weather,
 };
 
 #[derive(Debug, Deserialize)]
@@ -33,9 +64,9 @@ pub struct Names {
   pub name_ja: String,
 
   #[serde(flatten)]
-  pub plurals: Plurals,
+  pub plurals: Option<Plurals>,
   #[serde(flatten)]
-  pub singulars: Singulars,
+  pub singulars: Option<Singulars>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -66,18 +97,50 @@ pub struct Singulars {
   pub singular_ja: String,
 }
 
+macro_rules! route_segment {
+  ($($model:ident => $e:expr),+$(,)?) => {
+    $(
+      impl HasRouteSegment for $model {
+        fn route_segment() -> &'static str {
+          $e
+        }
+      }
+    )+
+  };
+  ($($model:ident),+$(,)?) => {
+    $(
+      impl HasRouteSegment for $model {
+        fn route_segment() -> &'static str {
+          stringify!($model)
+        }
+      }
+    )+
+  };
+}
+
 pub trait HasRouteSegment {
   fn route_segment() -> &'static str;
 }
 
-impl HasRouteSegment for Action {
-  fn route_segment() -> &'static str {
-    "Action"
-  }
-}
+route_segment!(
+  Achievement,
+  Action,
+  Emote,
+  Fate,
+  InstanceContent,
+  Item,
+  Leve,
+  Mount,
+  PlaceName,
+  Quest,
+  Recipe,
+  Status,
+  Title,
+  Weather,
+);
 
-impl HasRouteSegment for Item {
-  fn route_segment() -> &'static str {
-    "Item"
-  }
-}
+route_segment!(
+  Enemy => "BNpcName",
+  Minion => "Companion",
+  Npc => "ENpcResident",
+);

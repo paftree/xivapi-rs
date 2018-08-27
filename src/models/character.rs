@@ -21,7 +21,7 @@ pub struct Character {
   pub race: Race,
   pub tribe: Tribe,
   pub server: World,
-  pub title: Option<usize>,
+  pub title: Option<u64>,
   pub town: Town,
   #[serde(with = "url_serde")]
   pub avatar: Url,
@@ -29,8 +29,8 @@ pub struct Character {
   pub free_company_id: String,
   pub gender: Gender,
   pub guardian_deity: GuardianDeity,
-  pub minions: Vec<usize>,
-  pub mounts: Vec<usize>,
+  pub minions: Vec<u64>,
+  pub mounts: Vec<u64>,
   pub class_jobs: BTreeMap<String, ClassJob>,
   pub gear_set: GearSet,
   pub grand_company: Option<GrandCompany>,
@@ -70,7 +70,7 @@ pub struct GearSet {
   pub job_id: u64,
   pub level: u64,
   pub gear_key: String,
-  pub attributes: BTreeMap<Attribute, usize>,
+  pub attributes: BTreeMap<Attribute, u64>,
   pub gear: BTreeMap<GearSlot, Gear>,
 }
 
@@ -97,11 +97,11 @@ pub enum GearSlot {
 #[serde(rename_all = "PascalCase")]
 pub struct Gear {
   #[serde(rename = "ID")]
-  pub id: Option<usize>,
-  pub dye: Option<usize>,
+  pub id: Option<u64>,
+  pub dye: Option<u64>,
   pub mirage: Option<serde_json::Value>,
   pub materia: Vec<serde_json::Value>,
-  pub creator: Option<usize>,
+  pub creator: Option<u64>,
 }
 
 #[derive(Debug, Deserialize)]

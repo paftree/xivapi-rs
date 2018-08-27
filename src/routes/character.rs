@@ -5,8 +5,6 @@ use crate::{
   models::character::CharacterResult,
 };
 
-use ffxiv_types::World;
-
 use std::borrow::Cow;
 
 pub mod search;
