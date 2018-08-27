@@ -1,4 +1,4 @@
-// use crate::prelude::Either;
+use crate::prelude::Either;
 
 use ffxiv_types::World;
 
@@ -45,8 +45,8 @@ pub struct Character {
 #[serde(rename_all = "PascalCase")]
 pub struct CharacterResult {
   pub state: State,
-  // pub payload: Either<Character, [!; 0]>,
-  pub payload: Option<Character>,
+  pub payload: Either<Character, serde_json::Value>,
+  // pub payload: Option<Character>,
 }
 
 #[derive(Debug, Deserialize)]
