@@ -1,4 +1,4 @@
-use super::{Metadata, id::EmoteId};
+use super::{Metadata, super::id::EmoteId};
 
 use std::collections::BTreeMap;
 

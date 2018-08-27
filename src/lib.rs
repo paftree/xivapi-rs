@@ -17,7 +17,10 @@ pub mod models;
 pub mod prelude;
 
 use crate::{
-  models::id::*,
+  models::{
+    id::*,
+    content,
+  },
   routes::{
     character::{
       CharacterBuilder,
@@ -81,87 +84,87 @@ impl XivApi {
   }
 
   /// Fetch a specific action by its ID.
-  pub fn action(&self, id: ActionId) -> ContentBuilder<models::Action> {
+  pub fn action(&self, id: ActionId) -> ContentBuilder<content::Action> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific item by its ID.
-  pub fn item(&self, id: ItemId) -> ContentBuilder<models::Item> {
+  pub fn item(&self, id: ItemId) -> ContentBuilder<content::Item> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific achievement by its ID.
-  pub fn achievement(&self, id: AchievementId) -> ContentBuilder<models::Achievement> {
+  pub fn achievement(&self, id: AchievementId) -> ContentBuilder<content::Achievement> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific emote by its ID.
-  pub fn emote(&self, id: EmoteId) -> ContentBuilder<models::Emote> {
+  pub fn emote(&self, id: EmoteId) -> ContentBuilder<content::Emote> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific enemy by its ID.
-  pub fn enemy(&self, id: EnemyId) -> ContentBuilder<models::Enemy> {
+  pub fn enemy(&self, id: EnemyId) -> ContentBuilder<content::Enemy> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific fate by its ID.
-  pub fn fate(&self, id: FateId) -> ContentBuilder<models::Fate> {
+  pub fn fate(&self, id: FateId) -> ContentBuilder<content::Fate> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch specific instance content by its ID.
-  pub fn instance_content(&self, id: InstanceContentId) -> ContentBuilder<models::InstanceContent> {
+  pub fn instance_content(&self, id: InstanceContentId) -> ContentBuilder<content::InstanceContent> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific leve by its ID.
-  pub fn leve(&self, id: LeveId) -> ContentBuilder<models::Leve> {
+  pub fn leve(&self, id: LeveId) -> ContentBuilder<content::Leve> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific minion by its ID.
-  pub fn minion(&self, id: MinionId) -> ContentBuilder<models::Minion> {
+  pub fn minion(&self, id: MinionId) -> ContentBuilder<content::Minion> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific mount by its ID.
-  pub fn mount(&self, id: MountId) -> ContentBuilder<models::Mount> {
+  pub fn mount(&self, id: MountId) -> ContentBuilder<content::Mount> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific NPC by its ID.
-  pub fn npc(&self, id: NpcId) -> ContentBuilder<models::Npc> {
+  pub fn npc(&self, id: NpcId) -> ContentBuilder<content::Npc> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific place name by its ID.
-  pub fn place_name(&self, id: PlaceNameId) -> ContentBuilder<models::PlaceName> {
+  pub fn place_name(&self, id: PlaceNameId) -> ContentBuilder<content::PlaceName> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific quest by its ID.
-  pub fn quest(&self, id: QuestId) -> ContentBuilder<models::Quest> {
+  pub fn quest(&self, id: QuestId) -> ContentBuilder<content::Quest> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific recipe by its ID.
-  pub fn recipe(&self, id: RecipeId) -> ContentBuilder<models::Recipe> {
+  pub fn recipe(&self, id: RecipeId) -> ContentBuilder<content::Recipe> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific status by its ID.
-  pub fn status(&self, id: StatusId) -> ContentBuilder<models::Status> {
+  pub fn status(&self, id: StatusId) -> ContentBuilder<content::Status> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific title by its ID.
-  pub fn title(&self, id: TitleId) -> ContentBuilder<models::Title> {
+  pub fn title(&self, id: TitleId) -> ContentBuilder<content::Title> {
     ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific weather by its ID.
-  pub fn weather(&self, id: WeatherId) -> ContentBuilder<models::Weather> {
+  pub fn weather(&self, id: WeatherId) -> ContentBuilder<content::Weather> {
     ContentBuilder::new(self, id.0)
   }
 }

@@ -1,6 +1,6 @@
 use crate::prelude::Either;
 
-use super::{Metadata, GamePatch, id::EnemyId};
+use super::{Metadata, GamePatch, super::id::EnemyId};
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]

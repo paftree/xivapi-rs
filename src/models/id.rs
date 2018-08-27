@@ -1,3 +1,5 @@
+//! All IDs.
+
 macro_rules! id {
   ($($(#[$meta:meta])* $name:ident);+$(;)?) => {
     $(

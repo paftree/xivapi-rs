@@ -1,7 +1,7 @@
 use crate::{
   XivApi,
   builder::Builder,
-  models::HasRouteSegment,
+  models::content::HasRouteSegment,
 };
 
 use std::borrow::Cow;

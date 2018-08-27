@@ -7,7 +7,6 @@ use crate::{
     SearchResult,
     SortOrder,
     StringAlgo,
-    StringColumn,
   },
 };
 
@@ -29,7 +28,7 @@ pub struct SearchBuilder<'x, 'a> {
   indexes: Option<Vec<Index>>,
 
   #[serde(skip_serializing_if = "Option::is_none")]
-  string_column: Option<StringColumn>,
+  string_column: Option<&'a str>,
 
   #[serde(skip_serializing_if = "Option::is_none")]
   string_algo: Option<StringAlgo>,
@@ -104,7 +103,7 @@ impl SearchBuilder<'x, 'a> {
     self
   }
 
-  pub fn string_column(&mut self, s: StringColumn) -> &mut Self {
+  pub fn string_column(&mut self, s: &'a str) -> &mut Self {
     self.string_column = Some(s);
     self
   }

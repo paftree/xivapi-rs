@@ -1,3 +1,5 @@
+//! Search models.
+
 pub mod achievement;
 pub mod action;
 pub mod emote;
@@ -98,12 +100,6 @@ pub enum Index {
   Status,
   Title,
   Weather,
-}
-
-#[derive(Debug, Clone, Copy, Serialize)]
-#[serde(rename_all = "snake_case")]
-pub enum StringColumn {
-  Description,
 }
 
 #[derive(Debug, Clone, Copy, Serialize)]

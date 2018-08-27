@@ -1,3 +1,5 @@
+//! Character models.
+
 use crate::prelude::Either;
 
 use super::id::CharacterId;

@@ -1,12 +1,12 @@
-use super::{Metadata, id::FateId};
+use super::{Metadata, super::id::ItemId};
 
 use std::collections::BTreeMap;
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
-pub struct Fate {
+pub struct Item {
   #[serde(flatten)]
-  pub metadata: Metadata<FateId>,
+  pub metadata: Metadata<ItemId>,
   #[serde(flatten)]
   pub other: BTreeMap<String, serde_json::Value>,
 }
