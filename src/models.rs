@@ -6,6 +6,7 @@ pub mod character;
 pub mod emote;
 pub mod enemy;
 pub mod fate;
+pub mod id;
 pub mod instance_content;
 pub mod item;
 pub mod leve;
@@ -41,11 +42,13 @@ pub use self::{
   weather::Weather,
 };
 
+use self::id::GamePatchId;
+
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
-pub struct Metadata {
+pub struct Metadata<I> {
   #[serde(rename = "ID")]
-  pub id: usize,
+  pub id: I,
   #[serde(flatten)]
   pub names: Names,
   pub icon: String,
@@ -103,7 +106,7 @@ pub struct Singulars {
 #[serde(rename_all = "PascalCase")]
 pub struct GamePatch {
   #[serde(rename = "ID")]
-  pub id: u64,
+  pub id: GamePatchId,
   pub ex_version: u64,
   #[serde(with = "crate::routes::int_bool")]
   pub is_expansion: bool,

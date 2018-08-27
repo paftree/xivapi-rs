@@ -1,4 +1,4 @@
-use super::Metadata;
+use super::{Metadata, id::EmoteId};
 
 use std::collections::BTreeMap;
 
@@ -6,7 +6,7 @@ use std::collections::BTreeMap;
 #[serde(rename_all = "PascalCase")]
 pub struct Emote {
   #[serde(flatten)]
-  pub metadata: Metadata,
+  pub metadata: Metadata<EmoteId>,
   #[serde(flatten)]
   pub other: BTreeMap<String, serde_json::Value>,
 }

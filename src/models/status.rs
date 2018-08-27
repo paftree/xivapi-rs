@@ -1,4 +1,4 @@
-use super::Metadata;
+use super::{Metadata, id::StatusId};
 
 use std::collections::BTreeMap;
 
@@ -6,7 +6,7 @@ use std::collections::BTreeMap;
 #[serde(rename_all = "PascalCase")]
 pub struct Status {
   #[serde(flatten)]
-  pub metadata: Metadata,
+  pub metadata: Metadata<StatusId>,
   #[serde(flatten)]
   pub other: BTreeMap<String, serde_json::Value>,
 }

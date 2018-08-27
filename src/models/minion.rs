@@ -1,4 +1,4 @@
-use super::Metadata;
+use super::{Metadata, id::MinionId};
 
 use std::collections::BTreeMap;
 
@@ -6,7 +6,7 @@ use std::collections::BTreeMap;
 #[serde(rename_all = "PascalCase")]
 pub struct Minion {
   #[serde(flatten)]
-  pub metadata: Metadata,
+  pub metadata: Metadata<MinionId>,
   #[serde(flatten)]
   pub other: BTreeMap<String, serde_json::Value>,
 }

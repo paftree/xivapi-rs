@@ -1,5 +1,7 @@
 use crate::prelude::Either;
 
+use super::id::CharacterId;
+
 use ffxiv_types::World;
 
 use url::Url;
@@ -12,7 +14,7 @@ pub mod search;
 #[serde(rename_all = "PascalCase")]
 pub struct Character {
   #[serde(rename = "ID")]
-  pub id: u64,
+  pub id: CharacterId,
   pub name: String,
   pub nameday: String,
   pub parse_date: u64,

@@ -2,7 +2,7 @@ use crate::{
   XivApi,
   builder::Builder,
   comma::CommaSerializer,
-  models::character::CharacterResult,
+  models::{character::CharacterResult, id::CharacterId},
 };
 
 use std::borrow::Cow;
@@ -16,7 +16,7 @@ pub struct CharacterBuilder<'x, 'a> {
   api: &'x XivApi,
 
   #[serde(skip)]
-  id: u64,
+  id: CharacterId,
 
   #[serde(
     skip_serializing_if = "Option::is_none",
@@ -33,12 +33,12 @@ impl Builder<'x> for CharacterBuilder<'x, 'a> {
   }
 
   fn route(&self) -> Cow<str> {
-    Cow::Owned(format!("/Character/{}", self.id))
+    Cow::Owned(format!("/Character/{}", self.id.0))
   }
 }
 
 impl CharacterBuilder<'x, 'a> {
-  crate fn new(api: &'x XivApi, id: u64) -> Self {
+  crate fn new(api: &'x XivApi, id: CharacterId) -> Self {
     CharacterBuilder {
       api,
       id,

@@ -1,4 +1,4 @@
-use super::Metadata;
+use super::{Metadata, id::RecipeId};
 
 use std::collections::BTreeMap;
 
@@ -6,7 +6,7 @@ use std::collections::BTreeMap;
 #[serde(rename_all = "PascalCase")]
 pub struct Recipe {
   #[serde(flatten)]
-  pub metadata: Metadata,
+  pub metadata: Metadata<RecipeId>,
   #[serde(flatten)]
   pub other: BTreeMap<String, serde_json::Value>,
 }

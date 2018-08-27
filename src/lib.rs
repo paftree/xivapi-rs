@@ -16,13 +16,16 @@ pub mod error;
 pub mod models;
 pub mod prelude;
 
-use crate::routes::{
-  character::{
-    CharacterBuilder,
-    search::SearchBuilder as CharacterSearchBuilder,
-  },
-  search::SearchBuilder,
-  content::ContentBuilder,
+use crate::{
+  models::id::*,
+  routes::{
+    character::{
+      CharacterBuilder,
+      search::SearchBuilder as CharacterSearchBuilder,
+    },
+    search::SearchBuilder,
+    content::ContentBuilder,
+  }
 };
 
 /// The main driver for accessing XIVAPI.
@@ -68,7 +71,7 @@ impl XivApi {
   }
 
   /// Fetch a specific character by their Lodestone ID.
-  pub fn character(&self, id: u64) -> CharacterBuilder {
+  pub fn character(&self, id: CharacterId) -> CharacterBuilder {
     CharacterBuilder::new(self, id)
   }
 
@@ -78,87 +81,87 @@ impl XivApi {
   }
 
   /// Fetch a specific action by its ID.
-  pub fn action(&self, id: u64) -> ContentBuilder<models::Action> {
-    ContentBuilder::new(self, id)
+  pub fn action(&self, id: ActionId) -> ContentBuilder<models::Action> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific item by its ID.
-  pub fn item(&self, id: u64) -> ContentBuilder<models::Item> {
-    ContentBuilder::new(self, id)
+  pub fn item(&self, id: ItemId) -> ContentBuilder<models::Item> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific achievement by its ID.
-  pub fn achievement(&self, id: u64) -> ContentBuilder<models::Achievement> {
-    ContentBuilder::new(self, id)
+  pub fn achievement(&self, id: AchievementId) -> ContentBuilder<models::Achievement> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific emote by its ID.
-  pub fn emote(&self, id: u64) -> ContentBuilder<models::Emote> {
-    ContentBuilder::new(self, id)
+  pub fn emote(&self, id: EmoteId) -> ContentBuilder<models::Emote> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific enemy by its ID.
-  pub fn enemy(&self, id: u64) -> ContentBuilder<models::Enemy> {
-    ContentBuilder::new(self, id)
+  pub fn enemy(&self, id: EnemyId) -> ContentBuilder<models::Enemy> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific fate by its ID.
-  pub fn fate(&self, id: u64) -> ContentBuilder<models::Fate> {
-    ContentBuilder::new(self, id)
+  pub fn fate(&self, id: FateId) -> ContentBuilder<models::Fate> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch specific instance content by its ID.
-  pub fn instance_content(&self, id: u64) -> ContentBuilder<models::InstanceContent> {
-    ContentBuilder::new(self, id)
+  pub fn instance_content(&self, id: InstanceContentId) -> ContentBuilder<models::InstanceContent> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific leve by its ID.
-  pub fn leve(&self, id: u64) -> ContentBuilder<models::Leve> {
-    ContentBuilder::new(self, id)
+  pub fn leve(&self, id: LeveId) -> ContentBuilder<models::Leve> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific minion by its ID.
-  pub fn minion(&self, id: u64) -> ContentBuilder<models::Minion> {
-    ContentBuilder::new(self, id)
+  pub fn minion(&self, id: MinionId) -> ContentBuilder<models::Minion> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific mount by its ID.
-  pub fn mount(&self, id: u64) -> ContentBuilder<models::Mount> {
-    ContentBuilder::new(self, id)
+  pub fn mount(&self, id: MountId) -> ContentBuilder<models::Mount> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific NPC by its ID.
-  pub fn npc(&self, id: u64) -> ContentBuilder<models::Npc> {
-    ContentBuilder::new(self, id)
+  pub fn npc(&self, id: NpcId) -> ContentBuilder<models::Npc> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific place name by its ID.
-  pub fn place_name(&self, id: u64) -> ContentBuilder<models::PlaceName> {
-    ContentBuilder::new(self, id)
+  pub fn place_name(&self, id: PlaceNameId) -> ContentBuilder<models::PlaceName> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific quest by its ID.
-  pub fn quest(&self, id: u64) -> ContentBuilder<models::Quest> {
-    ContentBuilder::new(self, id)
+  pub fn quest(&self, id: QuestId) -> ContentBuilder<models::Quest> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific recipe by its ID.
-  pub fn recipe(&self, id: u64) -> ContentBuilder<models::Recipe> {
-    ContentBuilder::new(self, id)
+  pub fn recipe(&self, id: RecipeId) -> ContentBuilder<models::Recipe> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific status by its ID.
-  pub fn status(&self, id: u64) -> ContentBuilder<models::Status> {
-    ContentBuilder::new(self, id)
+  pub fn status(&self, id: StatusId) -> ContentBuilder<models::Status> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific title by its ID.
-  pub fn title(&self, id: u64) -> ContentBuilder<models::Title> {
-    ContentBuilder::new(self, id)
+  pub fn title(&self, id: TitleId) -> ContentBuilder<models::Title> {
+    ContentBuilder::new(self, id.0)
   }
 
   /// Fetch a specific weather by its ID.
-  pub fn weather(&self, id: u64) -> ContentBuilder<models::Weather> {
-    ContentBuilder::new(self, id)
+  pub fn weather(&self, id: WeatherId) -> ContentBuilder<models::Weather> {
+    ContentBuilder::new(self, id.0)
   }
 }
