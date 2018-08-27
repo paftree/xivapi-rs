@@ -45,8 +45,7 @@ pub struct Character {
 #[serde(rename_all = "PascalCase")]
 pub struct CharacterResult {
   pub state: State,
-  pub payload: Either<Character, serde_json::Value>,
-  // pub payload: Option<Character>,
+  pub payload: Either<Character, [!; 0]>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -227,7 +226,57 @@ enum_number!(GuardianDeity {
   Althyk = 12,
 });
 
-enum_number!(Attribute {
+// FIXME: workaround for https://github.com/serde-rs/serde/issues/1183
+macro_rules! special_enum_number {
+  ($name:ident { $($variant:ident = $value:expr, )* }) => {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+    pub enum $name {
+      $($variant = $value,)*
+    }
+
+    impl serde::Serialize for $name {
+      fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+        where S: serde::Serializer,
+      {
+        serializer.serialize_u64(*self as u64)
+      }
+    }
+
+    impl<'de> serde::Deserialize<'de> for $name {
+      fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+        where D: serde::Deserializer<'de>,
+      {
+        struct Visitor;
+
+        impl<'de> ::serde::de::Visitor<'de> for Visitor {
+          type Value = $name;
+
+          fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
+            formatter.write_str("positive integer")
+          }
+
+          fn visit_str<E>(self, value: &str) -> Result<$name, E>
+            where E: serde::de::Error,
+          {
+            let value: u64 = value
+              .parse()
+              .map_err(|_| E::custom(format!("expected integer, found {}", value)))?;
+            match value {
+              $( $value => Ok($name::$variant), )*
+              _ => Err(E::custom(
+                  format!("unknown {} value: {}",
+                  stringify!($name), value))),
+            }
+          }
+        }
+
+        deserializer.deserialize_str(Visitor)
+      }
+    }
+  }
+}
+
+special_enum_number!(Attribute {
   Strength = 1,
   Dexterity = 2,
   Vitality = 3,
