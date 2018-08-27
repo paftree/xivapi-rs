@@ -43,9 +43,9 @@ impl XivApi {
     XivApi { client, key: None }
   }
 
-  pub fn with_key<S: Into<String>>(key: S) -> Self {
+  pub fn with_key<S: AsRef<str>>(key: S) -> Self {
     let client = Client::new();
-    let key = Some(key.into());
+    let key = Some(key.as_ref().to_string());
     XivApi { client, key }
   }
 
