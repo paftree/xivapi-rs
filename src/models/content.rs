@@ -110,13 +110,15 @@ pub struct Singulars {
 pub struct GamePatch {
   #[serde(rename = "ID")]
   pub id: GamePatchId,
-  pub ex_version: u64,
+  pub ex_version: i64,
   #[serde(with = "crate::routes::int_bool")]
   pub is_expansion: bool,
   #[serde(flatten)]
   pub names: PatchNames,
   pub release_date: i64,
   pub version: f64,
+  #[serde(default, with = "url_serde")]
+  pub url: Option<Url>,
   #[serde(with = "url_serde")]
   pub banner: Option<Url>,
 }
