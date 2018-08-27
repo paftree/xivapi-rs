@@ -1,3 +1,5 @@
+#![feature(never_type)]
+
 #[macro_use] extern crate serde_derive;
 
 use xivapi::{
@@ -17,10 +19,14 @@ fn main() -> Result<(), failure::Error> {
 
   // let id = res.characters[0].id;
 
-  let res: CharInfoResult = api
+  // let res: CharInfoResult = api
+  //   .character(1)
+  //   .columns(&["Name", "Server", "Race", "Gender"])
+  //   .json()?;
+
+  let res = api
     .character(1)
-    .columns(&["Name", "Server", "Race", "Gender"])
-    .json()?;
+    .send()?;
 
   println!("{:#?}", res);
 
@@ -31,7 +37,7 @@ fn main() -> Result<(), failure::Error> {
 #[serde(rename_all = "PascalCase")]
 struct CharInfoResult {
   state: State,
-  payload: Option<CharInfo>,
+  payload: Either<CharInfo, serde_json::Value>,
 }
 
 #[derive(Debug, Deserialize)]
