@@ -42,7 +42,13 @@ pub mod int_bool {
       type Value = bool;
 
       fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(formatter, "0 or 1")
+        write!(formatter, "0 or 1 or a boolean")
+      }
+
+      fn visit_bool<E>(self, b: bool) -> Result<Self::Value, E>
+        where E: serde::de::Error,
+      {
+        Ok(b)
       }
 
       fn visit_u64<E>(self, v: u64) -> Result<Self::Value, E>
