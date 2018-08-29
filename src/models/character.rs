@@ -46,7 +46,6 @@ pub struct Character {
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct CharacterResult {
-  #[serde(rename = "Info.Character")]
   pub info: Info,
   pub character: Option<Character>,
 }
@@ -54,6 +53,12 @@ pub struct CharacterResult {
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct Info {
+  pub character: CharacterInfo,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct CharacterInfo {
   pub state: State,
   pub updated: Option<u64>,
 }
@@ -110,7 +115,7 @@ pub struct Gear {
   pub id: Option<u64>,
   pub dye: Option<u64>,
   pub mirage: Option<serde_json::Value>,
-  pub materia: Vec<serde_json::Value>,
+  pub materia: Vec<u64>,
   pub creator: Option<u64>,
 }
 
