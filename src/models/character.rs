@@ -47,7 +47,7 @@ pub struct Character {
 #[serde(rename_all = "PascalCase")]
 pub struct CharacterResult {
   #[serde(rename = "Info.Character")]
-  pub info: Option<Info>,
+  pub info: Info,
   pub character: Option<Character>,
 }
 
