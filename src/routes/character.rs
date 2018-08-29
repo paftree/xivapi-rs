@@ -42,7 +42,7 @@ impl CharacterBuilder<'x, 'a> {
     CharacterBuilder {
       api,
       id,
-      columns: None,
+      columns: Some(&["Character", "Info.Character"]),
     }
   }
 

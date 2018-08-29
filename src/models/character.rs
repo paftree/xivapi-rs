@@ -1,7 +1,5 @@
 //! Character models.
 
-use crate::prelude::Either;
-
 use super::id::CharacterId;
 
 use ffxiv_types::World;
@@ -48,8 +46,16 @@ pub struct Character {
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct CharacterResult {
+  #[serde(rename = "Info.Character")]
+  pub info: Option<Info>,
+  pub character: Option<Character>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct Info {
   pub state: State,
-  pub payload: Either<Character, [!; 0]>,
+  pub updated: Option<u64>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -172,10 +178,12 @@ macro_rules! enum_number {
 }
 
 enum_number!(State {
+  None = 0,
   Adding = 1,
   Cached = 2,
   NotFound = 3,
   Blacklist = 4,
+  Private = 5,
 });
 
 enum_number!(Race {
