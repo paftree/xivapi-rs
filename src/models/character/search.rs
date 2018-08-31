@@ -31,5 +31,5 @@ pub struct SearchCharacter {
   pub avatar: Url,
   pub rank: Option<serde_json::Value>,
   pub rank_icon: Option<serde_json::Value>,
-  pub feasts: u64,
+  pub feast_matches: u64,
 }

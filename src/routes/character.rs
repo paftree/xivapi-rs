@@ -1,7 +1,6 @@
 use crate::{
   XivApi,
   builder::Builder,
-  comma::CommaSerializer,
   models::{character::CharacterResult, id::CharacterId},
 };
 
@@ -20,9 +19,15 @@ pub struct CharacterBuilder<'x, 'a> {
 
   #[serde(
     skip_serializing_if = "Option::is_none",
-    serialize_with = "CommaSerializer::with",
+    serialize_with = "crate::util::serde::comma::CommaSerializer::with",
   )]
   columns: Option<&'a [&'a str]>,
+
+  #[serde(
+    skip_serializing_if = "Option::is_none",
+    serialize_with = "crate::util::serde::comma::CommaSerializer::with",
+  )]
+  tags: Option<&'a [&'a str]>,
 }
 
 impl Builder<'x> for CharacterBuilder<'x, 'a> {
@@ -43,6 +48,7 @@ impl CharacterBuilder<'x, 'a> {
       api,
       id,
       columns: Some(&["Character", "Info.Character"]),
+      tags: None,
     }
   }
 
@@ -54,6 +60,12 @@ impl CharacterBuilder<'x, 'a> {
   /// call `json`.
   pub fn columns(&mut self, c: &'a [&'a str]) -> &mut Self {
     self.columns = Some(c);
+    self
+  }
+
+  /// Set tracking tags on this request.
+  pub fn tags(&mut self, tags: &'a [&'a str]) -> &mut Self {
+    self.tags = Some(tags);
     self
   }
 }

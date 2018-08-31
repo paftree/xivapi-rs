@@ -17,12 +17,21 @@ pub struct ContentBuilder<'x, 'a, O> {
 
   #[serde(
     skip_serializing_if = "Option::is_none",
-    with = "crate::routes::int_bool",
+    with = "crate::util::serde::int_bool",
   )]
   minified: Option<bool>,
 
-  #[serde(skip_serializing_if = "Option::is_none")]
+  #[serde(
+    skip_serializing_if = "Option::is_none",
+    serialize_with = "crate::util::serde::comma::CommaSerializer::with",
+  )]
   columns: Option<&'a [&'a str]>,
+
+  #[serde(
+    skip_serializing_if = "Option::is_none",
+    serialize_with = "crate::util::serde::comma::CommaSerializer::with",
+  )]
+  tags: Option<&'a [&'a str]>,
 
   #[serde(skip)]
   _phantom: std::marker::PhantomData<O>,
@@ -52,6 +61,7 @@ impl<O> ContentBuilder<'x, 'a, O>
       id,
       minified: None,
       columns: None,
+      tags: None,
       _phantom: Default::default(),
     }
   }
@@ -70,6 +80,12 @@ impl<O> ContentBuilder<'x, 'a, O>
   /// call `json`.
   pub fn columns(&mut self, c: &'a [&'a str]) -> &mut Self {
     self.columns = Some(c);
+    self
+  }
+
+  /// Set tracking tags on this request.
+  pub fn tags(&mut self, tags: &'a [&'a str]) -> &mut Self {
+    self.tags = Some(tags);
     self
   }
 }

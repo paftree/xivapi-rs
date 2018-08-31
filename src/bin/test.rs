@@ -29,7 +29,8 @@ fn main() -> Result<(), failure::Error> {
   //   .character(1)
   //   .send()?;
 
-  let res = api.enemy(7537.into()).send()?;
+  // let res = api.enemy(7537.into()).send()?;
+  let res = api.character(2.into()).send()?;
 
   println!("{:#?}", res);
 

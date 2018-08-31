@@ -9,12 +9,12 @@ use url::Url;
 
 use std::str::FromStr;
 
-mod comma;
-pub mod routes;
 pub mod builder;
 pub mod error;
 pub mod models;
 pub mod prelude;
+pub mod routes;
+pub mod util;
 
 use crate::{
   models::{

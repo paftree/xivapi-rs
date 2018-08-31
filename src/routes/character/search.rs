@@ -24,6 +24,12 @@ pub struct SearchBuilder<'x, 'a> {
 
   #[serde(skip_serializing_if = "Option::is_none")]
   page: Option<usize>,
+
+  #[serde(
+    skip_serializing_if = "Option::is_none",
+    serialize_with = "crate::util::serde::comma::CommaSerializer::with",
+  )]
+  tags: Option<&'a [&'a str]>,
 }
 
 impl Builder<'x> for SearchBuilder<'x, 'a> {
@@ -45,6 +51,7 @@ impl SearchBuilder<'x, 'a> {
       name: None,
       server: None,
       page: None,
+      tags: None,
     }
   }
 
@@ -63,6 +70,12 @@ impl SearchBuilder<'x, 'a> {
   // Select the page of results to view.
   pub fn page(&mut self, p: usize) -> &mut Self {
     self.page = Some(p);
+    self
+  }
+
+  /// Set tracking tags on this request.
+  pub fn tags(&mut self, tags: &'a [&'a str]) -> &mut Self {
+    self.tags = Some(tags);
     self
   }
 }
