@@ -5,7 +5,7 @@ use url::Url;
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct FreeCompany {
-  #[serde(rename = "ID", deserialize_with = "crate::util::serde::php_u64::deserialize")]
+  #[serde(rename = "ID")]
   pub id: u64,
   pub name: String,
   pub tag: String,
