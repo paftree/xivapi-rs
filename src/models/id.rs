@@ -42,6 +42,7 @@ id!(
   InstanceContentId;
   ItemId;
   LeveId;
+  LinkshellId(#[serde(deserialize_with = "crate::util::serde::php_u64::deserialize")]);
   MinionId;
   MountId;
   NpcId;

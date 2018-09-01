@@ -10,6 +10,7 @@ pub mod free_company;
 pub mod instance_content;
 pub mod item;
 pub mod leve;
+pub mod linkshell;
 pub mod minion;
 pub mod mount;
 pub mod npc;

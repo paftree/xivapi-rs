@@ -13,6 +13,7 @@ use std::borrow::Cow;
 
 pub mod character;
 pub mod free_company;
+pub mod linkshell;
 
 /// A request builder for searching for content on XIVAPI.
 #[derive(Debug, Serialize)]

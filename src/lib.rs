@@ -24,10 +24,12 @@ use crate::{
   routes::{
     character::CharacterBuilder,
     free_company::FreeCompanyBuilder,
+    linkshell::LinkshellBuilder,
     search::{
       SearchBuilder,
       character::SearchBuilder as CharacterSearchBuilder,
       free_company::SearchBuilder as FreeCompanySearchBuilder,
+      linkshell::SearchBuilder as LinkshellSearchBuilder,
     },
     content::ContentBuilder,
   }
@@ -88,6 +90,16 @@ impl XivApi {
   /// Fetch a specific free company by its ID.
   pub fn free_company(&self, id: FreeCompanyId) -> FreeCompanyBuilder {
     FreeCompanyBuilder::new(self, id)
+  }
+
+  /// Search for a linkshell.
+  pub fn linkshell_search(&self) -> LinkshellSearchBuilder {
+    LinkshellSearchBuilder::new(self)
+  }
+
+  /// Fetch a specific linkshell by its ID.
+  pub fn linkshell(&self, id: LinkshellId) -> LinkshellBuilder {
+    LinkshellBuilder::new(self, id)
   }
 
   /// Search for game content.
