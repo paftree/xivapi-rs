@@ -2,9 +2,11 @@
 
 pub mod achievement;
 pub mod action;
+pub mod character;
 pub mod emote;
 pub mod enemy;
 pub mod fate;
+pub mod free_company;
 pub mod instance_content;
 pub mod item;
 pub mod leve;
@@ -75,6 +77,16 @@ pub struct Pagination {
   pub results: u64,
   pub results_per_page: u64,
   pub results_total: u64,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct LodestonePagination {
+  pub page_current: usize,
+  pub page_next: usize,
+  pub page_previous: usize,
+  pub page_total: usize,
+  pub total: usize,
 }
 
 #[derive(Debug, Clone, Copy, Serialize)]

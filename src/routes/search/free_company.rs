@@ -1,16 +1,14 @@
 use crate::{
   XivApi,
   builder::Builder,
-  models::character::{
-    search::SearchResult,
-  },
+  models::search::free_company::SearchResult,
 };
 
 use ffxiv_types::World;
 
 use std::borrow::Cow;
 
-/// A builder for searching for a character on XIVAPI.
+/// A builder for searching for a free company on XIVAPI.
 #[derive(Debug, Serialize)]
 pub struct SearchBuilder<'x, 'a> {
   #[serde(skip)]
@@ -27,7 +25,7 @@ pub struct SearchBuilder<'x, 'a> {
 
   #[serde(
     skip_serializing_if = "Option::is_none",
-    serialize_with = "crate::util::serde::comma::CommaSerializer::with",
+    serialize_with = "crate::util::serde::CommaSerializer::with",
   )]
   tags: Option<&'a [&'a str]>,
 }
@@ -40,7 +38,7 @@ impl Builder<'x> for SearchBuilder<'x, 'a> {
   }
 
   fn route(&self) -> Cow<str> {
-    Cow::Borrowed("/Character/Search")
+    Cow::Borrowed("/FreeCompany/Search")
   }
 }
 

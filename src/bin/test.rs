@@ -3,9 +3,10 @@
 #[macro_use] extern crate serde_derive;
 
 use xivapi::{
-  prelude::*,
+  models::character::{Race, Gender},
   models::search::Index,
-  models::character::{Race, Gender, State},
+  models::State,
+  prelude::*,
 };
 
 fn main() -> Result<(), failure::Error> {
@@ -30,7 +31,10 @@ fn main() -> Result<(), failure::Error> {
   //   .send()?;
 
   // let res = api.enemy(7537.into()).send()?;
-  let res = api.character(2.into()).send()?;
+  // let res = api.character(2.into()).send()?;
+  // let res = api.free_company_search().name("a").server(World::Adamantoise).send();
+  // let res = api.free_company(9233645873504730768.into()).send();
+  let res = api.free_company(9233645873504776755.into()).send();
 
   println!("{:#?}", res);
 

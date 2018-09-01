@@ -1,11 +1,11 @@
 //! All IDs.
 
 macro_rules! id {
-  ($($(#[$meta:meta])* $name:ident);+$(;)?) => {
+  ($($(#[$meta:meta])* $name:ident$(($(#[$inner_meta:meta])*))?);+$(;)?) => {
     $(
       $(#[$meta])*
-      #[derive(Debug, Hash, PartialEq, Eq, Clone, Copy)]
-      pub struct $name(pub u64);
+      #[derive(Debug, Serialize, Deserialize, Hash, PartialEq, Eq, Clone, Copy)]
+      pub struct $name($($(#[$inner_meta])*)? pub u64);
 
       impl From<u64> for $name {
         fn from(u: u64) -> Self {
@@ -26,24 +26,6 @@ macro_rules! id {
           self.0
         }
       }
-
-      impl serde::Serialize for $name {
-        fn serialize<S>(&self, ser: S) -> std::result::Result<S::Ok, S::Error>
-          where S: serde::Serializer,
-        {
-          use serde::Serialize;
-          self.0.serialize(ser)
-        }
-      }
-
-      impl serde::Deserialize<'de> for $name {
-        fn deserialize<D>(des: D) -> std::result::Result<Self, D::Error>
-          where D: serde::Deserializer<'de>
-        {
-          use serde::Deserialize;
-          u64::deserialize(des).map($name)
-        }
-      }
     )+
   }
 }
@@ -55,6 +37,7 @@ id!(
   EmoteId;
   EnemyId;
   FateId;
+  FreeCompanyId(#[serde(deserialize_with = "crate::util::serde::php_u64::deserialize")]);
   GamePatchId;
   InstanceContentId;
   ItemId;

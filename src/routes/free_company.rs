@@ -1,19 +1,19 @@
 use crate::{
   XivApi,
   builder::Builder,
-  models::{character::CharacterResult, id::CharacterId},
+  models::{free_company::FreeCompanyResult, id::FreeCompanyId},
 };
 
 use std::borrow::Cow;
 
-/// A builder for fetching character information from XIVAPI.
+/// A builder for fetching free company information from XIVAPI.
 #[derive(Debug, Serialize)]
-pub struct CharacterBuilder<'x, 'a> {
+pub struct FreeCompanyBuilder<'x, 'a> {
   #[serde(skip)]
   api: &'x XivApi,
 
   #[serde(skip)]
-  id: CharacterId,
+  id: FreeCompanyId,
 
   #[serde(
     skip_serializing_if = "Option::is_none",
@@ -28,24 +28,24 @@ pub struct CharacterBuilder<'x, 'a> {
   tags: Option<&'a [&'a str]>,
 }
 
-impl Builder<'x> for CharacterBuilder<'x, 'a> {
-  type Output = CharacterResult;
+impl Builder<'x> for FreeCompanyBuilder<'x, 'a> {
+  type Output = FreeCompanyResult;
 
   fn api(&self) -> &'x XivApi {
     self.api
   }
 
   fn route(&self) -> Cow<str> {
-    Cow::Owned(format!("/Character/{}", self.id.0))
+    Cow::Owned(format!("/FreeCompany/{}", self.id.0))
   }
 }
 
-impl CharacterBuilder<'x, 'a> {
-  crate fn new(api: &'x XivApi, id: CharacterId) -> Self {
-    CharacterBuilder {
+impl FreeCompanyBuilder<'x, 'a> {
+  crate fn new(api: &'x XivApi, id: FreeCompanyId) -> Self {
+    FreeCompanyBuilder {
       api,
       id,
-      columns: Some(&["Character", "Info.Character"]),
+      columns: Some(&["FreeCompany", "Info.FreeCompany"]),
       tags: None,
     }
   }

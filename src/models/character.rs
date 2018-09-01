@@ -1,14 +1,20 @@
 //! Character models.
 
-use super::id::CharacterId;
+use super::{
+  LodestoneInfo,
+  id::{CharacterId, FreeCompanyId},
+};
+
+use chrono::{
+  DateTime, Utc,
+  serde::ts_seconds::deserialize as from_ts,
+};
 
 use ffxiv_types::World;
 
 use url::Url;
 
 use std::collections::BTreeMap;
-
-pub mod search;
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
@@ -17,7 +23,8 @@ pub struct Character {
   pub id: CharacterId,
   pub name: String,
   pub nameday: String,
-  pub parse_date: u64,
+  #[serde(deserialize_with = "from_ts")]
+  pub parse_date: DateTime<Utc>,
   #[serde(rename = "PvPTeam")]
   pub pvp_team: Option<serde_json::Value>,
   pub race: Race,
@@ -28,7 +35,7 @@ pub struct Character {
   #[serde(with = "url_serde")]
   pub avatar: Url,
   pub bio: String,
-  pub free_company_id: String,
+  pub free_company_id: Option<FreeCompanyId>,
   pub gender: Gender,
   pub guardian_deity: GuardianDeity,
   pub minions: Vec<u64>,
@@ -53,14 +60,7 @@ pub struct CharacterResult {
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct Info {
-  pub character: CharacterInfo,
-}
-
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "PascalCase")]
-pub struct CharacterInfo {
-  pub state: State,
-  pub updated: Option<u64>,
+  pub character: LodestoneInfo,
 }
 
 #[derive(Debug, Deserialize)]
@@ -135,61 +135,6 @@ pub struct Verification {
   #[serde(rename = "VerificationTokenPass")]
   pub pass: bool,
 }
-
-macro_rules! enum_number {
-  ($name:ident { $($variant:ident = $value:expr, )* }) => {
-    #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
-    pub enum $name {
-      $($variant = $value,)*
-    }
-
-    impl serde::Serialize for $name {
-      fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-        where S: serde::Serializer,
-      {
-        serializer.serialize_u64(*self as u64)
-      }
-    }
-
-    impl<'de> serde::Deserialize<'de> for $name {
-      fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-        where D: serde::Deserializer<'de>,
-      {
-        struct Visitor;
-
-        impl<'de> ::serde::de::Visitor<'de> for Visitor {
-          type Value = $name;
-
-          fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
-            formatter.write_str("positive integer")
-          }
-
-          fn visit_u64<E>(self, value: u64) -> Result<$name, E>
-            where E: serde::de::Error,
-          {
-            match value {
-              $( $value => Ok($name::$variant), )*
-              _ => Err(E::custom(
-                  format!("unknown {} value: {}",
-                  stringify!($name), value))),
-            }
-          }
-        }
-
-        deserializer.deserialize_u64(Visitor)
-      }
-    }
-  }
-}
-
-enum_number!(State {
-  None = 0,
-  Adding = 1,
-  Cached = 2,
-  NotFound = 3,
-  Blacklist = 4,
-  Private = 5,
-});
 
 enum_number!(Race {
   Hyur = 1,

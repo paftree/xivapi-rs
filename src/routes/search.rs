@@ -11,6 +11,9 @@ use crate::{
 
 use std::borrow::Cow;
 
+pub mod character;
+pub mod free_company;
+
 /// A request builder for searching for content on XIVAPI.
 #[derive(Debug, Serialize)]
 pub struct SearchBuilder<'x, 'a> {
@@ -22,7 +25,7 @@ pub struct SearchBuilder<'x, 'a> {
 
   #[serde(
     skip_serializing_if = "Option::is_none",
-    serialize_with = "crate::util::serde::comma::CommaSerializer::with",
+    serialize_with = "crate::util::serde::CommaSerializer::with",
   )]
   indexes: Option<Vec<Index>>,
 
@@ -46,13 +49,13 @@ pub struct SearchBuilder<'x, 'a> {
 
   #[serde(
     skip_serializing_if = "Option::is_none",
-    serialize_with = "crate::util::serde::comma::CommaSerializer::with",
+    serialize_with = "crate::util::serde::CommaSerializer::with",
   )]
   filters: Option<&'a [&'a str]>,
 
   #[serde(
     skip_serializing_if = "Option::is_none",
-    serialize_with = "crate::util::serde::comma::CommaSerializer::with",
+    serialize_with = "crate::util::serde::CommaSerializer::with",
   )]
   tags: Option<&'a [&'a str]>,
 }

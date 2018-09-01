@@ -1,12 +1,35 @@
+use super::{
+  LodestoneInfo,
+  id::FreeCompanyId,
+};
+
+use chrono::{
+  DateTime, Utc,
+  serde::ts_seconds::deserialize as from_ts,
+};
+
 use ffxiv_types::World;
 
 use url::Url;
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
+pub struct FreeCompanyResult {
+  pub info: Info,
+  pub free_company: Option<FreeCompany>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct Info {
+  pub free_company: LodestoneInfo,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "PascalCase")]
 pub struct FreeCompany {
   #[serde(rename = "ID")]
-  pub id: u64,
+  pub id: FreeCompanyId,
   pub name: String,
   pub tag: String,
   pub server: World,
@@ -17,9 +40,11 @@ pub struct FreeCompany {
   pub crest: Vec<Url>,
   pub estate: Option<Estate>,
   pub focus: Vec<Focus>,
-  pub formed: i64,
+  #[serde(deserialize_with = "from_ts")]
+  pub formed: DateTime<Utc>,
   pub grand_company: String,
-  pub parse_date: i64,
+  #[serde(deserialize_with = "from_ts")]
+  pub parse_date: DateTime<Utc>,
   pub rank: u64,
   pub ranking: Ranking,
   pub recruitment: String,
@@ -96,7 +121,7 @@ fn ranking_u64<'de, D>(deserializer: D) -> Result<Option<u64>, D::Error>
   deserializer.deserialize_any(Visitor)
 }
 
-fn multi_url<'de, D>(deserializer: D) -> Result<Vec<Url>, D::Error>
+crate fn multi_url<'de, D>(deserializer: D) -> Result<Vec<Url>, D::Error>
   where D: serde::Deserializer<'de>,
 {
   use serde::Deserialize;

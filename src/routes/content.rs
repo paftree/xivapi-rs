@@ -23,13 +23,13 @@ pub struct ContentBuilder<'x, 'a, O> {
 
   #[serde(
     skip_serializing_if = "Option::is_none",
-    serialize_with = "crate::util::serde::comma::CommaSerializer::with",
+    serialize_with = "crate::util::serde::CommaSerializer::with",
   )]
   columns: Option<&'a [&'a str]>,
 
   #[serde(
     skip_serializing_if = "Option::is_none",
-    serialize_with = "crate::util::serde::comma::CommaSerializer::with",
+    serialize_with = "crate::util::serde::CommaSerializer::with",
   )]
   tags: Option<&'a [&'a str]>,
 

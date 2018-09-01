@@ -22,11 +22,13 @@ use crate::{
     content,
   },
   routes::{
-    character::{
-      CharacterBuilder,
-      search::SearchBuilder as CharacterSearchBuilder,
+    character::CharacterBuilder,
+    free_company::FreeCompanyBuilder,
+    search::{
+      SearchBuilder,
+      character::SearchBuilder as CharacterSearchBuilder,
+      free_company::SearchBuilder as FreeCompanySearchBuilder,
     },
-    search::SearchBuilder,
     content::ContentBuilder,
   }
 };
@@ -76,6 +78,16 @@ impl XivApi {
   /// Fetch a specific character by their Lodestone ID.
   pub fn character(&self, id: CharacterId) -> CharacterBuilder {
     CharacterBuilder::new(self, id)
+  }
+
+  /// Search for a free company.
+  pub fn free_company_search(&self) -> FreeCompanySearchBuilder {
+    FreeCompanySearchBuilder::new(self)
+  }
+
+  /// Fetch a specific free company by its ID.
+  pub fn free_company(&self, id: FreeCompanyId) -> FreeCompanyBuilder {
+    FreeCompanyBuilder::new(self, id)
   }
 
   /// Search for game content.
