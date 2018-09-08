@@ -7,7 +7,6 @@ use url::Url;
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct SearchResult {
-  #[serde(flatten)]
   pub pagination: Pagination,
   pub results: Vec<SearchFreeCompany>,
 }
