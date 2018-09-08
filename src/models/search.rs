@@ -80,16 +80,6 @@ pub struct Pagination {
   pub results_total: u64,
 }
 
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "PascalCase")]
-pub struct LodestonePagination {
-  pub page_current: usize,
-  pub page_next: usize,
-  pub page_previous: usize,
-  pub page_total: usize,
-  pub total: usize,
-}
-
 #[derive(Debug, Clone, Copy, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Index {

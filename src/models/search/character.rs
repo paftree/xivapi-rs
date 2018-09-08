@@ -1,4 +1,4 @@
-use super::LodestonePagination;
+use super::Pagination;
 
 use ffxiv_types::World;
 
@@ -8,8 +8,8 @@ use url::Url;
 #[serde(rename_all = "PascalCase")]
 pub struct SearchResult {
   #[serde(flatten)]
-  pub pagination: LodestonePagination,
-  pub characters: Vec<SearchCharacter>,
+  pub pagination: Pagination,
+  pub results: Vec<SearchCharacter>,
 }
 
 #[derive(Debug, Deserialize)]

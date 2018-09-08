@@ -1,6 +1,6 @@
 use crate::models::id::FreeCompanyId;
 
-use super::LodestonePagination;
+use super::Pagination;
 
 use url::Url;
 
@@ -8,8 +8,8 @@ use url::Url;
 #[serde(rename_all = "PascalCase")]
 pub struct SearchResult {
   #[serde(flatten)]
-  pub pagination: LodestonePagination,
-  pub free_companies: Vec<SearchFreeCompany>,
+  pub pagination: Pagination,
+  pub results: Vec<SearchFreeCompany>,
 }
 
 #[derive(Debug, Deserialize)]

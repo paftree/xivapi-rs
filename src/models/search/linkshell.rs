@@ -1,6 +1,6 @@
 use crate::models::id::LinkshellId;
 
-use super::LodestonePagination;
+use super::Pagination;
 
 use ffxiv_types::World;
 
@@ -8,7 +8,7 @@ use ffxiv_types::World;
 #[serde(rename_all = "PascalCase")]
 pub struct SearchResult {
   #[serde(flatten)]
-  pub pagination: LodestonePagination,
+  pub pagination: Pagination,
   pub linkshells: Vec<SearchLinkshell>,
 }
 
