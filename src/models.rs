@@ -62,8 +62,9 @@ pub mod search;
 #[serde(rename_all = "PascalCase")]
 pub struct LodestoneInfo {
   pub state: State,
-  #[serde(deserialize_with = "optional_timestamp")]
-  pub updated: Option<DateTime<Utc>>,
+  // #[serde(deserialize_with = "optional_timestamp")]
+  // pub updated: Option<DateTime<Utc>>,
+  pub updated: Option<String>,
 }
 
 enum_number!(State {
