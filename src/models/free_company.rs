@@ -3,10 +3,7 @@ use super::{
   id::FreeCompanyId,
 };
 
-use chrono::{
-  DateTime, Utc,
-  serde::ts_seconds::deserialize as from_ts,
-};
+use chrono::{DateTime, Utc};
 
 use ffxiv_types::World;
 
@@ -40,10 +37,10 @@ pub struct FreeCompany {
   pub crest: Vec<Url>,
   pub estate: Option<Estate>,
   pub focus: Vec<Focus>,
-  #[serde(deserialize_with = "from_ts")]
+  #[serde(deserialize_with = "crate::util::serde::ts_str")]
   pub formed: DateTime<Utc>,
   pub grand_company: String,
-  #[serde(deserialize_with = "from_ts")]
+  #[serde(deserialize_with = "crate::util::serde::ts_str")]
   pub parse_date: DateTime<Utc>,
   pub rank: u64,
   pub ranking: Ranking,

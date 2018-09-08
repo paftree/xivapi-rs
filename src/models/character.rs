@@ -5,10 +5,7 @@ use super::{
   id::{CharacterId, FreeCompanyId},
 };
 
-use chrono::{
-  DateTime, Utc,
-  serde::ts_seconds::deserialize as from_ts,
-};
+use chrono::{DateTime, Utc};
 
 use ffxiv_types::World;
 
@@ -23,7 +20,7 @@ pub struct Character {
   pub id: CharacterId,
   pub name: String,
   pub nameday: String,
-  #[serde(deserialize_with = "from_ts")]
+  #[serde(deserialize_with = "crate::util::serde::ts_str")]
   pub parse_date: DateTime<Utc>,
   #[serde(rename = "PvPTeam")]
   pub pvp_team: Option<serde_json::Value>,

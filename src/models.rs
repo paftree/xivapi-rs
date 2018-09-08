@@ -1,9 +1,6 @@
 //! The models representing API responses.
 
-use chrono::{
-  DateTime, Utc,
-  serde::ts_seconds::deserialize as from_ts,
-};
+use chrono::{DateTime, TimeZone, Utc};
 
 macro_rules! enum_number {
   ($name:ident { $($variant:ident = $value:expr, )* }) => {
@@ -62,9 +59,8 @@ pub mod search;
 #[serde(rename_all = "PascalCase")]
 pub struct LodestoneInfo {
   pub state: State,
-  // #[serde(deserialize_with = "optional_timestamp")]
-  // pub updated: Option<DateTime<Utc>>,
-  pub updated: Option<String>,
+  #[serde(deserialize_with = "optional_timestamp")]
+  pub updated: Option<DateTime<Utc>>,
 }
 
 enum_number!(State {
@@ -81,11 +77,16 @@ fn optional_timestamp<'de, D>(deserializer: D) -> Result<Option<DateTime<Utc>>, 
 {
   use serde::Deserialize;
 
-  #[derive(Deserialize)]
-  struct Wrapper(#[serde(deserialize_with = "from_ts")] DateTime<Utc>);
-
-  match Option::deserialize(deserializer)? {
-    Some(Wrapper(t)) => Ok(Some(t)),
+  match Option::<String>::deserialize(deserializer)? {
+    Some(t) => {
+      let ts: i64 = t
+        .parse()
+        .map_err(|_| serde::de::Error::invalid_value(
+          serde::de::Unexpected::Str(&t),
+          &"string containing a signed 64-bit integer",
+        ))?;
+      Ok(Some(Utc.timestamp(ts, 0)))
+    },
     None => Ok(None),
   }
 }

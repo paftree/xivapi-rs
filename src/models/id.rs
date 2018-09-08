@@ -37,12 +37,12 @@ id!(
   EmoteId;
   EnemyId;
   FateId;
-  FreeCompanyId(#[serde(deserialize_with = "crate::util::serde::php_u64::deserialize")]);
+  FreeCompanyId(#[serde(deserialize_with = "crate::util::serde::u64_str")]);
   GamePatchId;
   InstanceContentId;
   ItemId;
   LeveId;
-  LinkshellId(#[serde(deserialize_with = "crate::util::serde::php_u64::deserialize")]);
+  LinkshellId(#[serde(deserialize_with = "crate::util::serde::u64_str")]);
   MinionId;
   MountId;
   NpcId;

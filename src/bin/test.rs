@@ -26,9 +26,9 @@ fn main() -> Result<(), failure::Error> {
   //   .columns(&["Name", "Server", "Race", "Gender"])
   //   .json()?;
 
-  // let res = api
-  //   .character(1)
-  //   .send()?;
+  let res = api
+    .character(1.into())
+    .send()?;
 
   // let res = api.enemy(7537.into()).send()?;
   // let res = api.character(2.into()).send()?;
@@ -39,7 +39,7 @@ fn main() -> Result<(), failure::Error> {
   //   .name("lala world")
   //   .server(World::Adamantoise)
   //   .send();
-  let res = api.linkshell(20547673299957974.into()).send();
+  // let res = api.linkshell(20547673299957974.into()).send();
 
   println!("{:#?}", res);
 

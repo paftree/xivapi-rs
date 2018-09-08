@@ -1,9 +1,6 @@
 //! Content models.
 
-use chrono::{
-  DateTime, Utc,
-  serde::ts_seconds::deserialize as from_ts,
-};
+use chrono::{DateTime, Utc};
 
 use url::Url;
 
@@ -120,7 +117,7 @@ pub struct GamePatch {
   pub is_expansion: bool,
   #[serde(flatten)]
   pub names: PatchNames,
-  #[serde(deserialize_with = "from_ts")]
+  #[serde(deserialize_with = "crate::util::serde::ts_str")]
   pub release_date: DateTime<Utc>,
   pub version: f64,
   #[serde(default, with = "url_serde")]
