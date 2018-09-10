@@ -1,4 +1,4 @@
-#![feature(in_band_lifetimes, never_type, macro_at_most_once_rep)]
+#![feature(in_band_lifetimes, never_type, macro_at_most_once_rep, crate_visibility_modifier)]
 
 #[macro_use] extern crate failure;
 #[macro_use] extern crate serde_derive;
