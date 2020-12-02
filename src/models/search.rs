@@ -57,7 +57,7 @@ pub struct Metadata {
   #[serde(rename = "_")]
   pub index: String,
   #[serde(rename = "_Score")]
-  pub score: u64,
+  pub score: f64,
 }
 
 #[derive(Debug, Deserialize)]
