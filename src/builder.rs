@@ -23,7 +23,6 @@ pub trait Builder<'x>
   /// need to use the `json` function to deserialise into a custom data structure.
   fn send(&mut self) -> Result<Self::Output> {
     let text = self.text()?;
-    println!("{}",text);
     match serde_json::from_str::<ApiError>(&text) {
       Ok(e) => Err(Error::Api(e)),
       Err(_) => serde_json::from_str(&text).map_err(Error::Json),
