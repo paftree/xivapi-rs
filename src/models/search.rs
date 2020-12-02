@@ -22,7 +22,7 @@ pub mod title;
 pub mod weather;
 
 #[derive(Debug, Deserialize)]
-#[serde(tag = "GameType")]
+//#[serde(tag = "GameType")]
 pub enum SearchModel {
   Achievement(self::achievement::Achievement),
   Action(self::action::Action),
