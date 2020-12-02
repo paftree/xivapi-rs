@@ -14,8 +14,8 @@ pub struct Item {
   #[serde(rename = "ItemUICategory.Name")]
   pub item_ui_category_name: Option<String>,
   #[serde(rename = "ItemKind.Name")]
-  pub item_kind_name: String,
+  pub item_kind_name: Option<String>,
   #[serde(rename = "ItemSearchCategory.Name")]
   pub item_search_category_name: Option<String>,
-  pub rarity: u64,
+  pub rarity: Option<u64>,
 }
