@@ -7,7 +7,6 @@ use std::collections::BTreeMap;
 #[derive(Clone)]
 pub struct Item {
   #[serde(flatten)]
-  #[derive(Clone)]
   pub metadata: Metadata<ItemId>,
   #[serde(flatten)]
   pub other: BTreeMap<String, serde_json::Value>,
