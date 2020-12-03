@@ -40,7 +40,7 @@ id!(
   FreeCompanyId(#[serde(deserialize_with = "crate::util::serde::u64_str")]);
   GamePatchId;
   InstanceContentId;
-  ItemId(#[derive(Clone)]);
+  ItemId;
   LeveId;
   LinkshellId(#[serde(deserialize_with = "crate::util::serde::u64_str")]);
   MinionId;
