@@ -4,6 +4,7 @@ use std::collections::BTreeMap;
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
+#[derive(Clone)]
 pub struct Item {
   #[serde(flatten)]
   pub metadata: Metadata<ItemId>,
