@@ -48,6 +48,7 @@ pub enum SearchModel {
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
+#[derive(Clone)]
 pub struct Metadata {
   #[serde(rename = "ID")]
   pub id: u64,
